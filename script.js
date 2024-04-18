@@ -52,3 +52,55 @@ function resetTimer() {
 startButtonEl.addEventListener("click", startTimer);
 stopButtonEl.addEventListener("click", stopTimer);
 resetButtonEl.addEventListener("click", resetTimer);
+
+// -------------------------------------------
+
+const timer = document.querySelector("#timer");
+const start = document.querySelector("#start");
+const stop = document.querySelector("#stop");
+const reset = document.querySelector("#reset");
+
+const btn = document.querySelector("button");
+const inputEl = document.querySelector(".input");
+const bodyEl = document.querySelector("body");
+
+inputEl.checked = JSON.parse(localStorage.getItem("mode"));
+
+updateBody();
+
+function updateBody() {
+  if (inputEl.checked) {
+    bodyEl.style.background = "#35374b";
+    timer.style.color = "#eeeeee";
+
+    start.style.color = "#eeeeee";
+    start.style.border = "1px solid #eeeeee";
+
+    stop.style.color = "#eeeeee";
+    stop.style.border = "1px solid #eeeeee";
+
+    reset.style.color = "#eeeeee";
+    reset.style.border = "1px solid #eeeeee";
+  } else {
+    bodyEl.style.background = "#eeeeee";
+    timer.style.color = "#35374b";
+
+    start.style.color = "#35374b";
+    start.style.border = "1px solid #35374b";
+
+    stop.style.color = "#35374b";
+    stop.style.border = "1px solid #35374b";
+
+    reset.style.color = "#35374b";
+    reset.style.border = "1px solid #35374b";
+  }
+}
+
+inputEl.addEventListener("input", () => {
+  updateBody();
+  updateLocalStorage();
+});
+
+function updateLocalStorage() {
+  localStorage.setItem("mode", JSON.stringify(inputEl.checked));
+}
